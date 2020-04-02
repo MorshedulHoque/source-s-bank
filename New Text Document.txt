@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source's Bank</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div id="login">
+        <h1 class="text-center">Welcome to Source's Bank</h1>
+        <div class="submit-area">
+            <h4>Login</h4>
+            <input type="text" class="form-control" placeholder="Email">
+            <br>
+            <input type="password" class="form-control" placeholder="Password">
+            <br>
+            <button id="verify" class="btn btn-success">Enter</button>
+        </div>
+    </div>
+    <div id="transiction">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit status">
+                <h5>Deposit</h5>
+                <h2>$ <span id="currentDeposit">00</span> </h2>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+               <div class="withdraw status">
+                <h5>Withdraw</h5>
+                <h2>$ <span id="currentWithdraw">00</span> </h2>
+               </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="balance status">
+                <h5>Balance</h5>
+                <h2>$ <span id="finalBalance">1240</span> </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                 <h4>Deposit</h4>
+                <input id="depositAmount" class="form-control" placeholder="$ amount you want to deposit" type="text">
+                <br>
+                <button id="deposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                <h4>Withdraw</h4>
+                <input id="getAmount" class="form-control" placeholder="$ amount you want to withdraw" type="text">
+                <br>
+                <button id="withdraw" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const loginBtn = document.getElementById("verify");
+        loginBtn.addEventListener("click", function(){
+            const loginArea = document.getElementById("login");
+            loginArea.style.display = "none";
+            const transiction = document.getElementById("transiction");
+            transiction.style.display = "block";
+            
+        })
+
+        //deposit
+        const depositBtn = document.getElementById("deposit");
+        depositBtn.addEventListener("click",function(){
+            const depositAmount = document.getElementById("depositAmount").value; //jei value ta dicchi oita string hishebe ashche
+            const depositNumber = parseFloat(depositAmount); //jei value ta input dlam oitar string ta number hishebe nicche. Jei value ta ami input box a dicchi.
+
+            const currentDeposit = document.getElementById("currentDeposit").innerText; //jei value ta age theke ase ota add nicchi
+            const currentDepositNumber = parseFloat(currentDeposit); // string ta number a convert kore nicchi. Eta holo old value ta eta add hoye ase age theke
+            const totalDeposit = depositNumber + currentDepositNumber; // ager value and new value ta plus hocche
+
+            document.getElementById("currentDeposit").innerText = totalDeposit; //age jei value ta chilo ota plus korar por jei jogfol ta pacchi ota dara replace korchi. (document.getElementById("currentDeposit").innerText=eta hocche jei total value ta hocche ota)
+            document.getElementById("depositAmount").value = ""; //input box ta faka korchi
+
+            const finalValuee = document.getElementById("finalBalance").innerText;
+            const result = parseFloat(finalValuee);
+            const finalResult = depositNumber + result;
+
+            document.getElementById("finalBalance").innerText = finalResult;
+        })
+
+        //withdraw
+        const withdrawBtn = document.getElementById("withdraw");
+        withdrawBtn.addEventListener("click",function(){
+            const amount = document.getElementById("getAmount").value;
+            const withdrawBalance = parseFloat(amount);
+
+            const currentWithdraw = document.getElementById("currentWithdraw").innerText;
+            const currentWithdrawNumber = parseFloat(currentWithdraw);
+            const totalWithdraw = withdrawBalance + currentWithdrawNumber;
+
+            document.getElementById("currentWithdraw").innerText = totalWithdraw;
+            document.getElementById("getAmount").value = "";
+
+            const finalValuee = document.getElementById("finalBalance").innerText;
+            const result2 = parseFloat(finalValuee);
+            const finalResult2 = result2 - withdrawBalance;
+
+            document.getElementById("finalBalance").innerText = finalResult2;
+        })
+
+    </script>
+</body>
+</html>

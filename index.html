@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source's Bank</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div id="login">
+        <h1 class="text-center">Welcome to Source's Bank</h1>
+        <div class="submit-area">
+            <h4>Login</h4>
+            <input type="text" class="form-control" placeholder="Email">
+            <br>
+            <input type="password" class="form-control" placeholder="Password">
+            <br>
+            <button id="verify" class="btn btn-success">Enter</button>
+        </div>
+    </div>
+    <div id="transiction">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit status">
+                <h5>Deposit</h5>
+                <h2>$ <span id="currentDeposit">00</span> </h2>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+               <div class="withdraw status">
+                <h5>Withdraw</h5>
+                <h2>$ <span id="currentWithdraw">00</span> </h2>
+               </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="balance status">
+                <h5>Balance</h5>
+                <h2>$ <span id="finalBalance">1240</span> </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                 <h4>Deposit</h4>
+                <input id="depositAmount" class="form-control" placeholder="$ amount you want to deposit" type="text">
+                <br>
+                <button id="deposit" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-area">
+                <h4>Withdraw</h4>
+                <input id="getAmount" class="form-control" placeholder="$ amount you want to withdraw" type="text">
+                <br>
+                <button id="withdraw" class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const loginBtn = document.getElementById("verify");
+        loginBtn.addEventListener("click", function(){
+            const loginArea = document.getElementById("login");
+            loginArea.style.display = "none";
+            const transiction = document.getElementById("transiction");
+            transiction.style.display = "block";
+            
+        })
+
+        //deposit
+        const depositBtn = document.getElementById("deposit");
+        depositBtn.addEventListener("click",function(){
+            const depositNumber = getInputValue("depositAmount"); //input box er value ta nicchi
+
+            getSpanNumber("currentDeposit", depositNumber);
+            getSpanNumber("finalBalance",depositNumber);
+            document.getElementById("depositAmount").value = ""; 
+
+            
+        })
+        //withdraw
+        const withdrawBtn = document.getElementById("withdraw");
+        withdrawBtn.addEventListener("click",function(){
+            const withdrawBalance = getInputValue("getAmount"); //input box a jei value deoabhocche ota pacchi
+
+            getSpanNumber("currentWithdraw",withdrawBalance); //withdraw ammount er value ta nicchi
+            getSpanNumber("finalBalance",-1 * withdrawBalance);
+            document.getElementById("getAmount").value = "";     
+        })
+
+        function getInputValue(id){
+            const amount = document.getElementById(id).value; //jei value ta dicchi oita string hishebe ashche
+            const amountNumber = parseFloat(amount); //jei value ta input dlam oitar string ta number hishebe nicche. Jei value ta ami input box a dicchi.
+            return amountNumber;
+        }
+
+        function getSpanNumber(id, oldValue){
+            const finalValuee = document.getElementById(id).innerText;
+            const result = parseFloat(finalValuee);
+            const finalResult = oldValue + result;
+
+            document.getElementById(id).innerText = finalResult;
+        }
+
+        
+
+    </script>
+</body>
+</html>
